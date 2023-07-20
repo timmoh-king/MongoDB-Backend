@@ -24,6 +24,15 @@ test("a blog can be deleted", async () => {
   await api.delete("/api/blogs/64b8f198cb05e9ddaf678150").expect(204);
 }, 1000000);
 
+test("missing body contents", async () => {
+  const newBlog = {
+    title: "master DSA C programming language",
+    author: "Clickate Academy",
+    likes: 10378,
+  };
+  await api.put("/api/blogs/:id").send(newBlog).expect(400);
+});
+
 test("blogs are returned as JSON", async () => {
   await api
     .get("/api/blogs")
